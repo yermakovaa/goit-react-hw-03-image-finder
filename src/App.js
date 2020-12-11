@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import apiService from './services';
 import Container from './components/Container';
 import Searchbar from './components/Searchbar';
@@ -25,22 +27,30 @@ class App extends Component {
     }
   }
 
-  searchImages = () => {
+  searchImages = async () => {
     const { query, page } = this.state;
-    this.setState({ isLoading: true });
-    apiService(query, page)
-      .then(({ data }) => {
-        this.setState(({ images, page }) => ({
-          images: [...images, ...data.hits],
-          page: page + 1,
-        }));
 
-        if (data.hits.length === 0) {
-          this.setState({ error: `No results were found for ${query}!` });
-        }
-      })
-      .catch(error => this.setState({ error }))
-      .finally(this.setState({ isLoading: false }));
+    if (query.trim() === '') {
+      return toast.info('😱 Please enter a value for search images!');
+    }
+
+    this.toggleLoader();
+
+    try {
+      const request = await apiService(query, page);
+      this.setState(({ images, page }) => ({
+        images: [...images, ...request],
+        page: page + 1,
+      }));
+      this.scrollPage();
+      if (request.length === 0) {
+        this.setState({ error: `No results were found for ${query}!` });
+      }
+    } catch (error) {
+      this.setState({ error: 'Something went wrong. Try again.' });
+    } finally {
+      this.toggleLoader();
+    }
   };
 
   handleChange = e => {
@@ -54,7 +64,6 @@ class App extends Component {
 
   onLoadMore = () => {
     this.searchImages();
-    this.scrollPage();
   };
 
   onOpenModal = e => {
@@ -75,8 +84,8 @@ class App extends Component {
   };
 
   scrollPage = () => {
-    return window.scrollBy({
-      top: document.documentElement.clientHeight - 100,
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
       behavior: 'smooth',
     });
   };
@@ -98,7 +107,7 @@ class App extends Component {
           value={query}
         />
 
-        {error && <ErrorView texterror={error} />}
+        {error && <ErrorView text={error} />}
 
         {images.length > 0 && (
           <ImageGallery images={images} onOpenModal={this.onOpenModal} />
@@ -116,6 +125,7 @@ class App extends Component {
             largeImageURL={largeImageURL}
           />
         )}
+        <ToastContainer autoClose={3700} />
       </Container>
     );
   }
