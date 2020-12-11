@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import s from './ImageGalleryItem.module.css';
 
 function ImageGalleryItem({ webformatURL, largeImageURL, tags, onOpenModal }) {
@@ -14,5 +14,11 @@ function ImageGalleryItem({ webformatURL, largeImageURL, tags, onOpenModal }) {
     </li>
   );
 }
+
+ImageGalleryItem.propTypes = {
+  largeImageURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+};
 
 export default ImageGalleryItem;

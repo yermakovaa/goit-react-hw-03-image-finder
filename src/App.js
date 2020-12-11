@@ -107,7 +107,7 @@ class App extends Component {
           value={query}
         />
 
-        {error && <ErrorView text={error} />}
+        {error && <ErrorView texterror={error} />}
 
         {images.length > 0 && (
           <ImageGallery images={images} onOpenModal={this.onOpenModal} />
