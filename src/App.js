@@ -42,7 +42,6 @@ class App extends Component {
         images: [...images, ...request],
         page: page + 1,
       }));
-      this.scrollPage();
       if (request.length === 0) {
         this.setState({ error: `No results were found for ${query}!` });
       }
@@ -64,6 +63,7 @@ class App extends Component {
 
   onLoadMore = () => {
     this.searchImages();
+    this.scrollPage();
   };
 
   onOpenModal = e => {
@@ -84,10 +84,12 @@ class App extends Component {
   };
 
   scrollPage = () => {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
+    setTimeout(() => {
+      window.scrollBy({
+        top: document.documentElement.clientHeight - 160,
+        behavior: 'smooth',
+      });
+    }, 1000);
   };
 
   render() {
