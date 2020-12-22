@@ -111,13 +111,13 @@ class App extends Component {
 
         {error && <ErrorView texterror={error} />}
 
-        {images.length > 0 && (
+        {images.length > 0 && !error && (
           <ImageGallery images={images} onOpenModal={this.onOpenModal} />
         )}
 
         {isLoading && <LoaderComponent />}
 
-        {!isLoading && images.length > 0 && (
+        {!isLoading && images.length >= 12 && !error && (
           <Button onLoadMore={this.onLoadMore} />
         )}
 
