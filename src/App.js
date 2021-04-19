@@ -21,7 +21,7 @@ class App extends Component {
     showModal: false,
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_prevProps, prevState) {
     if (prevState.query !== this.state.query) {
       this.setState({ images: [], page: 1, error: null });
     }
