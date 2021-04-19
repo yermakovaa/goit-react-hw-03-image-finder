@@ -1,16 +1,18 @@
 {
-  "name": "goit-react-hw-03-image-finder",
-  "homepage": "https://yermakovaa.github.io/goit-react-hw-03-image-finder",
+  "name": "image-finder",
+  "homepage": "https://github.com/image-finder",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.5.0",
-    "gh-pages": "^3.1.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-loader-spinner": "^3.1.14",
     "react-scripts": "4.0.1",
+    "react-toastify": "^6.2.0",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -40,12 +42,10 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.21.0",
-    "husky": "^4.3.5",
-    "lint-staged": "^10.5.3",
+    "gh-pages": "^3.1.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
-    "prop-types": "^15.7.2",
-    "react-loader-spinner": "^3.1.14",
-    "react-toastify": "^6.2.0"
+    "prop-types": "^15.7.2"
   }
 }
